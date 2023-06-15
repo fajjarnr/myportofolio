@@ -1,0 +1,29 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    build: myportofolio
+  name: myportofolio
+  namespace: my-portofolio
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  source:
+    # contextDir: myportofolio
+    git:
+      uri: https://gitlab.apps.cluster-hvt9q.hvt9q.sandbox1172.opentlc.com/fajjarnr/myportofolio.git
+    type: Git
+  runPolicy: Serial
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: alpine:latest
+        namespace: openshift
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: myportofolio:latest
+      namespace: my-portofolio
+  successfulBuildsHistoryLimit: 5
