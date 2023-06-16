@@ -10,7 +10,7 @@ spec:
       script: |
         #!/bin/bash
 
-        git clone https://gitlab.apps.cluster-hvt9q.hvt9q.sandbox1172.opentlc.com/fajjarnr/myportofolio.git /workspace/myportofolio
+        git clone https://github.com/fajjarnr/myportofolio.git /workspace/myportofolio
 
     - name: configure-project
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli
