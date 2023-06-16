@@ -11,7 +11,7 @@ spec:
   source:
     # contextDir: myportofolio
     git:
-      uri: https://gitlab.apps.cluster-hvt9q.hvt9q.sandbox1172.opentlc.com/fajjarnr/myportofolio.git
+      uri: https://github.com/fajjarnr/myportofolio.git
     type: Git
   runPolicy: Serial
   strategy:
