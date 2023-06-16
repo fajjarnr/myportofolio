@@ -6,8 +6,8 @@ metadata:
   name: myportofolio
   namespace: my-portofolio
 spec:
-  host: myportofolio.apps.cluster-hvt9q.hvt9q.sandbox1172.opentlc.com
-  path: /
+  # host: myportofolio.apps.cluster-hvt9q.hvt9q.sandbox1172.opentlc.com
+  # path: /
   port:
     targetPort: 3000
   to:
