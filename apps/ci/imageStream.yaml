@@ -9,6 +9,7 @@ metadata:
 spec:
   lookupPolicy:
     local: false
+
 ---
 apiVersion: image.openshift.io/v1
 kind: ImageStream
@@ -18,18 +19,29 @@ metadata:
     openshift.io/image.dockerRepositoryCheck: enabled
   labels:
     build: myportofolio
-  name: alpine
-  namespace: openshift
+  name: myportofolio
+  namespace: my-portofolio
 spec:
   lookupPolicy:
     local: false
   tags:
-    - annotations:
-        openshift.io/imported-from: alpine:latest
+    - name: 16-alpine
+      annotations:
+        openshift.io/imported-from: node:16-alpine
       from:
         kind: DockerImage
-        name: alpine:latest
+        name: node:16-alpine
       generation: 2
-      name: latest
+      iconClass: icon-nodejs
+      referencePolicy:
+        type: Source
+    - name: latest
+      annotations:
+        openshift.io/imported-from: node:latest
+      from:
+        kind: DockerImage
+        name: node:latest
+      generation: 2
+      iconClass: icon-nodejs
       referencePolicy:
         type: Source

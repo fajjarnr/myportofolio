@@ -18,8 +18,8 @@ spec:
     dockerStrategy:
       from:
         kind: ImageStreamTag
-        name: alpine:latest
-        namespace: openshift
+        name: myportofolio:16-alpine
+        namespace: my-portofolio
     type: Docker
   output:
     to:

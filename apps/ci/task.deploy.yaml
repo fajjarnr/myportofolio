@@ -19,7 +19,7 @@ spec:
 
         set -euo pipefail
 
-        cd /workspace/src/myportofolio
+        cd /workspace/src/myportofolio/apps/ci
         oc apply -f imageStream.yaml
         oc apply -f buildConfig.yaml
 
