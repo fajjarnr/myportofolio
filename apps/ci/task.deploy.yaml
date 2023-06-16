@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: my-portofolio-deploy
+  name: deploy-my-portofolio
   namespace: my-portofolio
 spec:
   steps:
@@ -19,7 +19,7 @@ spec:
 
         set -euo pipefail
 
-        cd /workspace/src/myportofolio/apps/ci
+        cd /workspace/myportofolio/apps/ci
         oc apply -f imageStream.yaml
         oc apply -f buildConfig.yaml
 
@@ -39,7 +39,7 @@ spec:
 
         set -euxo pipefail
 
-        cd /workspace/myportofolio/apps/gitops
+        cd /workspace/myportofolio/apps/ci
         oc apply -f deployment.yaml
 
         BUILDDATE=$(date +%Y-%m-%d-%H%M%S)
