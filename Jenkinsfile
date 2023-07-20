@@ -5,7 +5,9 @@ pipeline {
     // }
     environment {
         QUAY_REGISTRY = "example-registry-quay-openshift-operators.apps.cluster-csvlw.csvlw.sandbox1045.opentlc.com"
-        REPO_NAME = "example-registry-quay-openshift-operators.apps.cluster-csvlw.csvlw.sandbox1045.opentlc.com/fajjarnr/myportofolio"
+        QUAY_REPO_NAME = "example-registry-quay-openshift-operators.apps.cluster-csvlw.csvlw.sandbox1045.opentlc.com/fajjarnr/myportofolio"
+        DOCKER_REGISTRY = "docker.io"
+        REPO_NAME = "fajjarnr/myportofolio"
     }
     stages {
         stage("init") {
@@ -45,11 +47,19 @@ pipeline {
             steps{
                 script{
                     echo "building the docker image..."
-                    withCredentials([usernamePassword(credentialsId: 'quay-registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t ${REPO_NAME}:latest ."
-                        sh "echo $PASS | docker login -u $USER --password-stdin ${QUAY_REGISTRY}"
+                        // sh "echo $PASS | docker login -u $USER --password-stdin ${QUAY_REGISTRY}"
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh "docker push ${REPO_NAME}:latest"
                     }
+                }
+            }
+        }
+        stage("Deploy to Swarm"){
+            steps{
+                script{
+                    
                 }
             }
         }

@@ -75,3 +75,16 @@ docker service create --name sonarqube \
 --mount type=volume,source=sonaqube_extensions,target=/opt/sonarqube/extensions \
 sonarqube
 ```
+
+exec container
+
+```sh
+docker container ls
+docker container exec -it -u 0 jenkins.1.onoz03y3ottabg8olfi5xa1v1 bash
+
+curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+bash nodesource_setup.sh
+apt install nodejs
+node -v
+npm -v
+```
