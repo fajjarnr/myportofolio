@@ -59,7 +59,7 @@ pipeline {
         stage("Deploy to Swarm"){
             steps{
                 script{
-                    
+                    echo "deploy to docker swarm..."
                 }
             }
         }
