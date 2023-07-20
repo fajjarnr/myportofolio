@@ -42,6 +42,7 @@ To learn more about the technologies used in this site template, see the followi
 - [MDX](https://mdxjs.com) - the MDX documentation
 
 build custom jenkins image
+<https://stackoverflow.com/questions/73110198/jenkins-error-buildind-docker-lib-x86-64-linux-gnu-libc-so-6-version-glibc>
 
 ```sh
 FROM jenkins/jenkins:lts
@@ -67,7 +68,7 @@ docker volume create sonaqube_data
 docker volume create sonaqube_logs
 docker volume create sonaqube_extensions
 
-docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+docker run -d --name sonarqube -p 9000:9000 sonarqube
 ```
 
 Docker Swarm
@@ -87,10 +88,16 @@ docker volume create jenkins_home
 
 docker run -d --name jenkins -p 8080:8080 -p 50000:50000 --volume jenkins_home:/var/jenkins_home fajjarnr/jenkins:latest
 
-docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock fajjarnr/jenkins:latest
+docker run -d --name jenkins \
+-p 8080:8080 -p 50000:50000 \
+-v jenkins_home:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+fajjarnr/jenkins:latest
 
-docker service create --name jenkins -p 8080:8080 -p 50000:50000 \
+docker service create --name jenkins \
+-p 8080:8080 -p 50000:50000 \
 --mount type=volume,source=jenkins_home,target=/var/jenkins_home \
+--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
 fajjarnr/jenkins:latest
 
 
