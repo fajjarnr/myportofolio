@@ -47,7 +47,7 @@ pipeline {
             steps{
                 script{
                     echo "building the docker image..."
-                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t ${REPO_NAME}:latest ."
                         // sh "echo $PASS | docker login -u $USER --password-stdin ${QUAY_REGISTRY}"
                         sh "echo $PASS | docker login -u $USER --password-stdin"
@@ -60,6 +60,7 @@ pipeline {
             steps{
                 script{
                     echo "deploy to docker swarm..."
+                    sh "docker service create --name myporto -p 3000:3000 fajjarnr/myportofolio:latest"
                 }
             }
         }

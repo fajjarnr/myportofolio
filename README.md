@@ -41,6 +41,25 @@ To learn more about the technologies used in this site template, see the followi
 - [Headless UI](https://headlessui.dev) - the official Headless UI documentation
 - [MDX](https://mdxjs.com) - the MDX documentation
 
+build custom jenkins image
+
+```sh
+FROM jenkins/jenkins:lts
+USER root
+RUN apt-get update && \
+    apt-get -y install apt-transport-https \
+         ca-certificates curl gnupg2 \
+         software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+    add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+      $(lsb_release -cs) \
+      stable" && \
+    apt-get update && \
+    apt-get -y install docker-ce
+USER jenkins
+```
+
 docker
 
 ```sh
@@ -66,7 +85,14 @@ docker service ps myporto
 
 docker volume create jenkins_home
 
-docker service create --name jenkins -p 8080:8080 -p 50000:50000 --mount type=volume,source=jenkins_home,target=/var/jenkins_home fajjarnr/jenkins:latest
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 --volume jenkins_home:/var/jenkins_home fajjarnr/jenkins:latest
+
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock fajjarnr/jenkins:latest
+
+docker service create --name jenkins -p 8080:8080 -p 50000:50000 \
+--mount type=volume,source=jenkins_home,target=/var/jenkins_home \
+fajjarnr/jenkins:latest
+
 
 docker service create --name sonarqube \
 -p 9000:9000 \
