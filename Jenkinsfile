@@ -50,8 +50,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t ${REPO_NAME}:latest ."
                         // sh "echo $PASS | docker login -u $USER --password-stdin ${QUAY_REGISTRY}"
-                        sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh "docker push ${REPO_NAME}:latest"
+                        // sh "docker push ${REPO_NAME}:latest"
                     }
                 }
             }
