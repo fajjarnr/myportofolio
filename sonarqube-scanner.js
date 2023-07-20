@@ -2,8 +2,8 @@ const scanner = require('sonarqube-scanner');
 
 scanner(
   {
-    serverUrl : 'http://13.229.155.47:9000',
-    token : "sqp_0234f84e0b47ef1925b25b0aad9a86604a9e95f3",
+    serverUrl : 'http://108.137.69.66:9000',
+    token : "sqp_b741f892e830c5bb1e05c100642a7c87de98ac6a",
     options: {
       'sonar.projectKey': 'My-Portofolio',
       'sonar.projectName': 'My Portofolio',
