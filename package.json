@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "coverage": "next test --coverage",
+    "test-sonar": "next test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
+    "sonar": "node sonarqube-scanner.js"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -31,6 +34,8 @@
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.5",
     "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.11"
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "jest-sonar-reporter": "^2.0.0",
+    "sonarqube-scanner": "3.0.1"
   }
 }

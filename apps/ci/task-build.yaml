@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-linter
+  namespace: my-portofolio
+spec:
+  steps:
+    - name: clone
+      image: node
+      script: |
+        #!/bin/bash
+
+        git clone https://github.com/fajjarnr/myportofolio.git /workspace/myportofolio
+
+    - name: see-folder
+      image: node
+      script: |
+        #!/bin/bash
+
+        cd /workspace/myportofolio/
+        ls -al
